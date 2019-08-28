@@ -1,0 +1,33 @@
+{
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.postCommitCommand": "sync",
+  "files.autoSave": "onFocusChange",
+  "javascript.implicitProjectConfig.checkJs": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.options": {
+    "extensions": [".js", ".ts", ".vue"]
+  },
+  "eslint.validate": [
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "typescript",
+      "autoFix": true
+    }
+  ],
+  // Vetur settings
+  // https://marketplace.visualstudio.com/items?itemName=octref.vetur
+  "vetur.experimental.templateInterpolationService": true,
+  "vetur.format.defaultFormatter.html": "none",
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.ts": "prettier"
+}
