@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <mda-table/>
-    
+    <mda-table />
   </div>
 </template>
 
@@ -10,9 +9,8 @@
 import Vue from "vue";
 import MdaTable from "./components/MdaTable.vue";
 
-
 export default Vue.extend({
-  name: "app",
+  name: "App",
   components: {
     MdaTable
   }

@@ -1,14 +1,13 @@
 <template>
   <div class="MdaTable">
     <h1>{{ msg }}</h1>
-    <p> here goes the table </p>
-    
-    <!-- 
+    <p>here goes the table</p>
+
+    <!--
 
       tabelle mit v-for
 
     -->
-    
   </div>
 </template>
 
