@@ -1,6 +1,7 @@
 <template>
   <div class="MdaTable">
     <h1>{{ msg }}</h1>
+    <h2>{{ petersData }}</h2>
     <p>here goes the table</p>
 
     <!--
@@ -18,6 +19,12 @@ export default Vue.extend({
   name: "MdaTable",
   props: {
     msg: String
+  },
+  data: function() {
+    return {
+      petersData:
+        "hello my very own data from the view model aka vue data object"
+    };
   }
 });
 </script>
