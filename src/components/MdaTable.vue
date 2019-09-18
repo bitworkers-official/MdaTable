@@ -2,7 +2,7 @@
   <div class="MdaTable">
     <h1>{{ msg }}</h1>
     <h2>{{ petersData }}</h2>
-    <p>{{ peoples }}</p>
+    <p>{{ peoples[2] }}</p>
     <p>here goes the tabletest</p>
 
     <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
