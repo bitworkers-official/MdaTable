@@ -2,7 +2,12 @@
   <div class="MdaTable">
     <h1>{{ msg }}</h1>
     <h2>{{ petersData }}</h2>
+    <p>{{ peoples }}</p>
     <p>here goes the table</p>
+
+    <div id="example1">
+      <button v-on:click="addSomone">Add Someone</button>
+    </div>
 
     <!--
 
@@ -16,14 +21,25 @@
 import Vue from "vue";
 
 export default Vue.extend({
+  el: "#example1",
   name: "MdaTable",
   props: {
     msg: String
   },
+  // why is that different anon. function then props ??
   data: function() {
     return {
       petersData:
-        "hello my very own data from the view model aka vue data object"
+        "hello my very own data from the view model aka vue data object",
+      peoples: [
+        { name: "peter", cwid: "ezhoz" },
+        { name: "paul", cwid: "abcde" },
+        { name: "marry", cwid: "fghij" }
+      ],
+      // actually doing something is probably not best practice to locate here ??
+      addSomone: function() {
+        this.peoples.push({ name: "newGuy", cwid: "xyzab" });
+      }
     };
   }
 });
