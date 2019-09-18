@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
     <h2>{{ petersData }}</h2>
     <p>{{ peoples }}</p>
-    <p>here goes the table</p>
+    <p>here goes the tabletest</p>
 
     <div id="example1">
       <button v-on:click="addSomone">Add Someone</button>
