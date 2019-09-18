@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <mda-table />
-    <!--<mda-table />-->
+    <mda-table />
   </div>
 </template>
 

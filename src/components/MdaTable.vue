@@ -5,9 +5,8 @@
     <p>{{ peoples }}</p>
     <p>here goes the tabletest</p>
 
-    <div id="example1">
-      <button v-on:click="addSomone">Add Someone</button>
-    </div>
+    <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
+    <button v-on:click="addSomone">Add Someone</button>
 
     <!--
 
@@ -21,12 +20,11 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  el: "#example1",
   name: "MdaTable",
   props: {
     msg: String
   },
-  // why is that different anon. function then props ??
+  // why is that different anon. function then props => having multiple instances of this container
   data: function() {
     return {
       petersData:
@@ -35,12 +33,13 @@ export default Vue.extend({
         { name: "peter", cwid: "ezhoz" },
         { name: "paul", cwid: "abcde" },
         { name: "marry", cwid: "fghij" }
-      ],
-      // actually doing something is probably not best practice to locate here ??
-      addSomone: function() {
-        this.peoples.push({ name: "newGuy", cwid: "xyzab" });
-      }
+      ]
     };
+  },
+  methods: {
+    addSomone: function() {
+      this.peoples.push({ name: "newGuy", cwid: "xyzab" });
+    }
   }
 });
 </script>
