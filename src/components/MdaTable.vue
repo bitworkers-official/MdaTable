@@ -1,6 +1,8 @@
 <template>
   <div class="MdaTable">
     <h1>{{ msg }}</h1>
+    <h1>MDAList (GitHub Version)</h1>
+
     <h2>{{ petersData }}</h2>
     <p>{{ peoples[2] }}</p>
     <p>here goes the tabletest</p>
