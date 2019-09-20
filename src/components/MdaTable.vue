@@ -1,14 +1,24 @@
 <template>
   <div class="MdaTable">
     <h1>{{ msg }}</h1>
-    <h1>MDAList (GitHub Version)</h1>
+    <p>MDAList (GitHub Version)</p>
 
-    <h2>{{ petersData }}</h2>
-    <p>{{ peoples[2] }}</p>
-    <p>here goes the tabletest</p>
+    <div v-for="(value, key) in peoples" v-bind:key="key">
+      <li v-for="(iValue, iKey) in value" v-bind:key="iKey">
+        Object # in Array: {{ key }} Key: {{ iKey }} Value: {{ iValue }}
+      </li>
+    </div>
+
+    <br />
 
     <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
     <button v-on:click="addSomone">Add Someone</button>
+
+    <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
+    <button v-on:click="delSomone">Delete Someone</button>
+
+    <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
+    <button v-on:click="showAll">Show me all people</button>
 
     <!--
 
@@ -41,6 +51,16 @@ export default Vue.extend({
   methods: {
     addSomone: function() {
       this.peoples.push({ name: "newGuy", cwid: "xyzab" });
+    },
+    delSomone: function() {
+      this.peoples.splice(0, 1);
+    },
+    showAll: function() {
+      alert("please refere to your console.");
+      for (let i of this.peoples) {
+        // eslint-disable-next-line no-console
+        console.log(i);
+      }
     }
   }
 });
