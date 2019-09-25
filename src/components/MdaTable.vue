@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import * as api from "../api/api";
 
 export default Vue.extend({
   name: "MdaTable",
@@ -36,9 +37,9 @@ export default Vue.extend({
       petersData:
         "hello my very own data from the view model aka vue data object",
       peoples: [
-        { name: "peter", cwid: "ezhoz" },
-        { name: "paul", cwid: "abcde" },
-        { name: "marry", cwid: "fghij" }
+        { name: "Hans", cwid: "ezhoz" },
+        { name: "Heinz", cwid: "abcde" },
+        { name: "Herrmann", cwid: "fghij" }
       ]
     };
   },
@@ -53,9 +54,12 @@ export default Vue.extend({
       this.peoples.splice(0, 1);
       //webservice.delUser();
     },
-    showAll: function() {
+    showAll: async function() {
       alert("please refere to your console.");
-      //webservice.getAllUser();
+      //webservice.getPeoples();
+      // Initialfall
+      this.peoples = await api.getAllPeople();
+
       for (let i of this.peoples) {
         // eslint-disable-next-line no-console
         console.log(i);
