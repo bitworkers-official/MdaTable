@@ -19,12 +19,6 @@
 
     <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
     <button v-on:click="showAll">Show me all people</button>
-
-    <!--
-
-      tabelle mit v-for
-
-    -->
   </div>
 </template>
 
