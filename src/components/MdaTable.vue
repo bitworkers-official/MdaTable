@@ -49,14 +49,19 @@ export default Vue.extend({
     };
   },
   methods: {
+    //So everything should be handlet immeadiatly (no save button)
+
     addSomone: function() {
       this.peoples.push({ name: "newGuy", cwid: "xyzab" });
+      //webservice.addUser();
     },
     delSomone: function() {
       this.peoples.splice(0, 1);
+      //webservice.delUser();
     },
     showAll: function() {
       alert("please refere to your console.");
+      //webservice.getAllUser();
       for (let i of this.peoples) {
         // eslint-disable-next-line no-console
         console.log(i);
