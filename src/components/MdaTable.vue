@@ -122,8 +122,9 @@ export default Vue.extend({
     },
     async updatePerson(person: api.Person, index: number) {
       this.$set(this.persons, index, person)
-      console.log('update')
-      // await api.updatePerson(person)
+      this.busy = true
+      await api.updatePerson(person)
+      this.busy = false
       // await this.updatePersons()
     },
     //So everything should be handlet immeadiatly (no save button)

@@ -16,6 +16,10 @@ export const deletePerson = async (person: Person) => {
   return new Promise(resolve => setTimeout(resolve, 1200))
 }
 
-export const updatePerson = async (person: Person) => {}
+export const updatePerson = async (person: Person) => {
+  return new Promise(resolve => setTimeout(resolve, 1200))
+}
 
-export const createPerson = async (person: Person) => {}
+export const createPerson = async (person: Person) => {
+  return new Promise(resolve => setTimeout(resolve, 1200))
+}
