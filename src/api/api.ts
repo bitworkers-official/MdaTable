@@ -12,8 +12,9 @@ export const getPersons = async (): Promise<Person[]> => {
   return res.data
 }
 
-// @ts-ignore
-export const deletePerson = async (person: Person) => {}
+export const deletePerson = async (person: Person) => {
+  return new Promise(resolve => setTimeout(resolve, 1200))
+}
 
 export const updatePerson = async (person: Person) => {}
 

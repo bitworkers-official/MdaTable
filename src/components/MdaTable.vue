@@ -1,22 +1,37 @@
 <template>
-  <div class="MdaTable">
-    <form method="POST">
-      <div v-show="persons.length" class="mda-table-row" aria-hidden>
+  <div :class="{ 'not-first-render': !firstRender }">
+    <div class="mda-table-headings">
+      <div
+        v-if="!firstRender"
+        class="mda-table-row mda-table-row-headings"
+        aria-hidden
+      >
         <div class="mda-table-cell mda-table-heading">
           Name
         </div>
         <div class="mda-table-cell mda-table-heading">
           Cwid
         </div>
+        <div class="mda-table-cell mda-table-heading">
+          &nbsp;
+        </div>
       </div>
+    </div>
+
+    <br />
+
+    <transition-group name="mda-table-row" tag="form" class="mda-table">
       <mda-table-row
         v-for="(person, index) in persons"
         :person="person"
         @updatePerson="updatePerson(person, index)"
+        @deletePerson="deletePerson(person, index)"
         :key="person.cwid"
         :busy="busy"
       />
+    </transition-group>
 
+    <form method="POST">
       <!-- <td>
           <button
             @click="deletePerson(person)"
@@ -70,6 +85,7 @@ import LoadingSpinner from './LoadingSpinner.vue'
 interface Data {
   persons: api.Person[]
   busy: boolean
+  firstRender: boolean
 }
 
 export default Vue.extend({
@@ -82,20 +98,24 @@ export default Vue.extend({
     return {
       persons: [],
       busy: false,
+      firstRender: true,
     }
   },
   async beforeMount() {
     this.busy = true
     await this.updatePersons()
     this.busy = false
+    this.firstRender = false
   },
   methods: {
     async updatePersons() {
       this.persons = await api.getPersons()
     },
-    async deletePerson(person: api.Person) {
+    async deletePerson(person: api.Person, index: number) {
+      this.persons.splice(index, 1)
+      this.busy = true
       await api.deletePerson(person)
-      await this.updatePersons()
+      this.busy = false
     },
     async updatePerson(person: api.Person, index: number) {
       this.$set(this.persons, index, person)
@@ -136,10 +156,14 @@ export default Vue.extend({
 </script>
 
 <style>
-form {
+.mda-table,
+.mda-table-headings {
   display: inline-flex;
   flex-direction: column;
-  margin: 2rem 1rem;
+}
+
+.mda-table-headings {
+  margin: 2rem 1rem 0 1rem;
 }
 
 .mda-table-row {
@@ -148,9 +172,9 @@ form {
 }
 
 .mda-table-cell {
-  flex: 1;
   margin: 1rem;
   text-align: left;
+  width: 6rem;
 }
 
 .mda-table-heading {
@@ -162,12 +186,20 @@ form {
 input {
   border: none;
   border-bottom: 1px solid transparent;
-  /* width: 3rem; */
-  /* margin: 0 1rem; */
-  /* padding-bottom: 1rem; */
+  width: 70px;
 }
 
-/* input:focus { */
-/* border-color: #42b983; */
-/* } */
+.mda-table-row {
+  transition: transform 1s;
+}
+
+.mda-table-row-leave-to {
+  transition: transform 1s;
+
+  opacity: 0;
+  transform: translate(-100px, 0);
+}
+.mda-table-row-leave-active {
+  height: 0px;
+}
 </style>
