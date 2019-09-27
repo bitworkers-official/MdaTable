@@ -1,5 +1,7 @@
 # MdaList
 
+![screenshot of mdalist](./demo.png)
+
 ## Demo
 
 👉 [https://frosty-mclean-0a3909.netlify.com/](https://frosty-mclean-0a3909.netlify.com/)
