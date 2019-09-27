@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e"
@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
+    "normalize.css": "^8.0.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -45,7 +46,19 @@
       "@vue/typescript"
     ],
     "rules": {
-      "vue/require-default-prop": "off"
+      "vue/require-default-prop": "off",
+      "vue-a11y/label-has-for": [
+        "error",
+        {
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          }
+        }
+      ],
+      "no-console": "off"
     },
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
@@ -55,6 +68,11 @@
     "plugins": {
       "autoprefixer": {}
     }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "browserslist": [
     "> 1%",
