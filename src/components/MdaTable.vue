@@ -3,7 +3,11 @@
     <h1>{{ msg }}</h1>
     <p>MDAList (GitHub Version)</p>
 
+    <!-- need a button that knows its index -->
+    <!-- where is the historic ora project -->
+
     <div v-for="(value, key) in peoples" v-bind:key="key">
+      <button v-on:click="edit">Edit</button>
       <li v-for="(iValue, iKey) in value" v-bind:key="iKey">
         Object # in Array: {{ key }} Key: {{ iKey }} Value: {{ iValue }}
       </li>
@@ -46,6 +50,8 @@ export default Vue.extend({
   methods: {
     //So everything should be handlet immeadiatly (no save button)
 
+    //All Operations that are changing the representation of the Data (Filter, Order) can be done on the vue-model alone (array-operations)
+
     addSomone: function() {
       this.peoples.push({ name: "newGuy", cwid: "xyzab" });
       //webservice.addUser();
@@ -64,6 +70,9 @@ export default Vue.extend({
         // eslint-disable-next-line no-console
         console.log(i);
       }
+    },
+    edit: async function() {
+      alert("edit your dataset");
     }
   }
 });
