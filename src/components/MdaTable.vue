@@ -1,8 +1,7 @@
 <template>
   <div class="MdaTable">
-    <h1>MDAList (GitHub Version)</h1>
     <form method="POST">
-      <div class="mda-table-row" aria-hidden>
+      <div v-show="persons.length" class="mda-table-row" aria-hidden>
         <div class="mda-table-cell mda-table-heading">
           Name
         </div>

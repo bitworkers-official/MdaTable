@@ -31,14 +31,13 @@ export default Vue.extend({
   watch: {
     spinning: {
       handler(value) {
-        console.log(value)
         if (value) {
           if (this.showTimeout) {
             clearTimeout(this.showTimeout)
           }
           this.showTimeout = setTimeout(() => {
             this.show = true
-          }, 200)
+          }, 150)
         } else {
           if (this.showTimeout !== null) {
             clearTimeout(this.showTimeout)
