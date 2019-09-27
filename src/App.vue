@@ -32,4 +32,8 @@ fieldset {
   margin: 0;
   padding: 0;
 }
+.screenreader-only {
+  position: absolute;
+  left: -9999px;
+}
 </style>

@@ -1,6 +1,9 @@
 <template>
-  <div v-show="show" class="wrapper">
-    <div class="spinner">
+  <div class="wrapper">
+    <div role="region" aria-live="polite" class="screenreader-only">
+      {{ show ? 'syncing' : 'done' }}
+    </div>
+    <div v-show="show" class="spinner">
       <div class="double-bounce1"></div>
       <div class="double-bounce2"></div>
     </div>
@@ -37,7 +40,7 @@ export default Vue.extend({
           }
           this.showTimeout = setTimeout(() => {
             this.show = true
-          }, 150)
+          }, 80)
         } else {
           if (this.showTimeout !== null) {
             clearTimeout(this.showTimeout)

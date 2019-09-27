@@ -1,7 +1,14 @@
 <template>
   <div class="mda-table-cell">
-    <label :for="id">{{ field }}</label>
-    <input :id="id" :value="person[field]" @input="handleInput" type="text" />
+    <label :for="id" class="screenreader-only">{{ field }}</label>
+    <input
+      :id="id"
+      :value="person[field]"
+      @input="handleInput"
+      type="text"
+      autocomplete="off"
+      spellcheck="false"
+    />
   </div>
 </template>
 
@@ -52,9 +59,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style>
-label {
-  display: none;
-}
-</style>

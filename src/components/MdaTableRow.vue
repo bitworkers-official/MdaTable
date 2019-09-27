@@ -58,5 +58,10 @@ legend {
 button {
   all: unset;
   cursor: pointer;
+  color: gray;
+}
+button:focus,
+button:hover {
+  color: red;
 }
 </style>

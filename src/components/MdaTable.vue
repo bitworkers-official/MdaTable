@@ -20,7 +20,12 @@
 
     <br />
 
-    <transition-group name="mda-table-row" tag="form" class="mda-table">
+    <transition-group
+      @submit.prevent=""
+      name="mda-table-row"
+      tag="div"
+      class="mda-table"
+    >
       <mda-table-row
         v-for="(person, index) in persons"
         :person="person"
@@ -31,8 +36,7 @@
       />
     </transition-group>
 
-    <form method="POST">
-      <!-- <td>
+    <!-- <td>
           <button
             @click="deletePerson(person)"
             @keydown.enter="deletePerson(person)"
@@ -40,7 +44,7 @@
             Delete
           </button>
         </!-->
-      <!-- <td>
+    <!-- <td>
           <button @click="edit(person)" @keydown.enter="edit(person)">
             Edit
           </button>
@@ -51,15 +55,14 @@
         <td>
           {{ person.name }}
         </td> -->
-      <!-- <li v-for="(iValue, iKey) in value" :key="iKey">
+    <!-- <li v-for="(iValue, iKey) in value" :key="iKey">
             Object # in Array: {{ key }} Key: {{ iKey }} Value: {{ iValue }} -->
 
-      <!-- if field.edited -->
-      <!-- input -->
-      <!-- else -->
-      <!-- td -->
-      <!-- </li> -->
-    </form>
+    <!-- if field.edited -->
+    <!-- input -->
+    <!-- else -->
+    <!-- td -->
+    <!-- </li> -->
 
     <loading-spinner :spinning="busy" />
 
@@ -101,7 +104,7 @@ export default Vue.extend({
       firstRender: true,
     }
   },
-  async beforeMount() {
+  async created() {
     this.busy = true
     await this.updatePersons()
     this.busy = false
@@ -190,12 +193,10 @@ input {
 }
 
 .mda-table-row {
-  transition: transform 1s;
+  transition: transform 0.3s;
 }
 
 .mda-table-row-leave-to {
-  transition: transform 1s;
-
   opacity: 0;
   transform: translate(-100px, 0);
 }
