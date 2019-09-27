@@ -1,41 +1,14 @@
-# mdalist
+# MdaList
 
-## Project setup
+## Demo
 
-``` bash
-npm install
+👉 [https://frosty-mclean-0a3909.netlify.com/](https://frosty-mclean-0a3909.netlify.com/)
+
+## Quickstart 🚀
+
+```sh
+git clone git@github.com:bitworkers-official/MdaList.git &&
+cd mdalist &&
+npm install &&
+npm run dev
 ```
-
-### Compiles and hot-reloads for development
-
-``` bash
-npm run serve
-```
-
-### Compiles and minifies for production
-
-``` bash
-npm run build
-```
-
-### Run your tests
-
-``` bash
-npm run test
-```
-
-### Lints and fixes files
-
-``` bash
-npm run lint
-```
-
-### Run your end-to-end tests
-
-``` bash
-npm run test:e2e
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
