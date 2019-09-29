@@ -6,7 +6,8 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "e2e": "vue-cli-service test:e2e"
+    "e2e": "vue-cli-service test:e2e",
+    "postinstall": "cd tests/e2e && npm install"
   },
   "dependencies": {
     "axios": "^0.19.0",
