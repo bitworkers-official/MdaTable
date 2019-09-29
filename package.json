@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "e2e": "vue-cli-service test:e2e",
+    "e2e:ci": "npm run e2e -- --headless",
     "postinstall": "cd tests/e2e && npm install"
   },
   "dependencies": {
