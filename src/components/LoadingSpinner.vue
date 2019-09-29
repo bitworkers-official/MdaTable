@@ -40,7 +40,7 @@ export default Vue.extend({
           }
           this.showTimeout = setTimeout(() => {
             this.show = true
-          }, 80)
+          }, 140)
         } else {
           if (this.showTimeout !== null) {
             clearTimeout(this.showTimeout)
