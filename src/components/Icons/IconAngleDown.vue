@@ -1,17 +1,6 @@
 <template>
-  <svg
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="17"
-    height="17"
-    viewBox="0 0 17 17"
-    role="presentation"
-  >
-    <path
-      d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z"
-      fill="currentColor"
-    />
+  <svg viewBox="0 0 767.5 1024" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 384l383.75 383.75L767.5 384H0z" fill="currentColor" />
   </svg>
 </template>
 

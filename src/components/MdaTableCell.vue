@@ -1,6 +1,6 @@
 <template>
   <td :class="field" class="mda-table-cell">
-    <label :for="id" class="screenreader-only">{{ field }}</label>
+    <!-- eslint-disable-next-line -->
     <input
       :id="id"
       :value="person[field]"
@@ -8,6 +8,7 @@
       type="text"
       autocomplete="off"
       spellcheck="false"
+      class="w-full bg-transparent"
     />
   </td>
 </template>
@@ -59,9 +60,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style scoped>
-input {
-  width: 100%;
-}
-</style>
