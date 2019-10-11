@@ -1,8 +1,14 @@
 import axios from 'axios'
 
 export interface Person {
-  cwid: string
-  name: string
+  topFunction: string
+  function: string
+  subFunction: string
+  subSubFunction: string
+  comments: string
+  functionalHead: string
+  functionalExpert: string
+  mda: string
 }
 
 export const getPersons = async (): Promise<Person[]> => {

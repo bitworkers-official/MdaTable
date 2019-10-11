@@ -2,20 +2,20 @@
   <div id="app">
     <h1>MDAList (GitHub Version)</h1>
     <mda-table />
-    <example />
+    <!-- <example /> -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import MdaTable from './components/MdaTable.vue'
-import Example from './components/DataGrid/Example.vue'
+// import Example from './components/DataGrid/Example.vue'
 
 export default Vue.extend({
   name: 'App',
   components: {
     MdaTable,
-    Example,
+    // Example,
   },
 })
 </script>
@@ -28,13 +28,10 @@ export default Vue.extend({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
 }
 
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
 .screenreader-only {
   position: absolute;
   left: -9999px;

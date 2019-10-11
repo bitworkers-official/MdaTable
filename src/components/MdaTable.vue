@@ -1,116 +1,196 @@
 <template>
-  <div :class="{ 'not-first-render': !firstRender }">
-    <div class="mda-table-headings">
-      <div
+  <table :class="{ 'not-first-render': !firstRender }" class="mda-table">
+    <thead class="mda-table-headings">
+      <tr
         v-if="!firstRender"
         class="mda-table-row mda-table-row-headings"
         aria-hidden
       >
-        <div class="mda-table-cell mda-table-heading">
-          Name
-        </div>
-        <div class="mda-table-cell mda-table-heading">
-          Cwid
-        </div>
-        <div class="mda-table-cell mda-table-heading">
-          &nbsp;
-        </div>
-      </div>
-    </div>
-
-    <br />
+        <td class="mda-table-cell mda-table-heading topFunction">
+          <span
+            @click="filterTopFunction = !filterTopFunction"
+            @keydown.enter="filterTopFunction = !filterTopFunction"
+          >
+            Top&nbsp;Function <icon-angle-down />
+          </span>
+          <div v-if="filterTopFunction" class="filter">
+            Filter by Top Function
+            <ul>
+              <li v-for="topFunction in topFunctions" :key="topFunction">
+                <button
+                  @click="setFilter({ topFunction })"
+                  @keydown.enter="setFilter({ topFunction })"
+                >
+                  {{ topFunction }}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+        <td class="mda-table-cell mda-table-heading function">
+          <span>Function <icon-angle-down /> </span>
+        </td>
+        <td class="mda-table-cell mda-table-heading subFunction">
+          <span> Sub&nbsp;Function <icon-angle-down /> </span>
+        </td>
+        <td class="mda-table-cell mda-table-heading subSubFunction">
+          <span> Sub&nbsp;Sub&nbsp;Function <icon-angle-down /> </span>
+        </td>
+        <td class="mda-table-cell mda-table-heading comments">
+          <span> Comments <icon-angle-down /> </span>
+        </td>
+        <td class="mda-table-cell mda-table-heading functionalHead">
+          <span> Functional&nbsp;Head <icon-angle-down /> </span>
+        </td>
+        <td class="mda-table-cell mda-table-heading functionalExpert">
+          <span> Functional&nbsp;Expert <icon-angle-down /> </span>
+        </td>
+        <td class="mda-table-cell mda-table-heading mda">
+          <span> Mda <icon-angle-down /> </span>
+        </td>
+      </tr>
+    </thead>
 
     <transition-group
       @submit.prevent=""
       name="mda-table-row"
-      tag="div"
+      tag="tbody"
       class="mda-table"
     >
-      <mda-table-row
-        v-for="(person, index) in persons"
-        :person="person"
-        @updatePerson="updatePerson(person, index)"
-        @deletePerson="deletePerson(person, index)"
-        :key="person.cwid"
-        :busy="busy"
-      />
+      <tr
+        v-for="person in filteredPersons"
+        :key="person.mda"
+        class="mda-table-row"
+      >
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="topFunction"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="function"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="subFunction"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="subSubFunction"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="comments"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="functionalHead"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="functionalExpert"
+        >
+        </mda-table-cell>
+        <mda-table-cell
+          :person="person"
+          @updatePerson="updatePerson"
+          field="mda"
+        ></mda-table-cell>
+      </tr>
     </transition-group>
 
-    <!-- <td>
-          <button
-            @click="deletePerson(person)"
-            @keydown.enter="deletePerson(person)"
-          >
-            Delete
-          </button>
-        </!-->
-    <!-- <td>
-          <button @click="edit(person)" @keydown.enter="edit(person)">
-            Edit
-          </button>
-        </td>
-        <td>
-          {{ person.cwid }}
-        </td>
-        <td>
-          {{ person.name }}
-        </td> -->
-    <!-- <li v-for="(iValue, iKey) in value" :key="iKey">
-            Object # in Array: {{ key }} Key: {{ iKey }} Value: {{ iValue }} -->
-
-    <!-- if field.edited -->
-    <!-- input -->
-    <!-- else -->
-    <!-- td -->
-    <!-- </li> -->
-
     <loading-spinner :spinning="busy" />
-
-    <br />
-
-    <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
-    <!-- <button v-on:click="addSomone">Add Someone</button> -->
-
-    <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
-    <!-- <button v-on:click="delSomone">Delete Someone</button> -->
-
-    <!-- eslint-disable-next-line vue-a11y/click-events-have-key-events -->
-    <!-- <button v-on:click="showAll">Show me all people</button> -->
-  </div>
+  </table>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import MdaTableRow from './MdaTableRow.vue'
-import * as api from '../api/api'
 import LoadingSpinner from './LoadingSpinner.vue'
+import IconAngleDown from './Icons/IconAngleDown.vue'
+import MdaTableCell from './MdaTableCell.vue'
+import * as api from '../api/api'
 
 interface Data {
   persons: api.Person[]
   busy: boolean
   firstRender: boolean
+  filterTopFunction: boolean
+  filter: {
+    topFunction?: string
+    function?: string
+    subFunction?: string
+    subSubFunction?: string
+  }
 }
 
 export default Vue.extend({
   name: 'MdaTable',
   components: {
-    MdaTableRow,
+    MdaTableCell,
     LoadingSpinner,
+    IconAngleDown,
   },
   data(): Data {
     return {
-      persons: [],
+      filterTopFunction: false,
+      filter: {},
+      persons: [...Array(10)].map((_, index) => ({
+        topFunction: `top function ${index}`,
+        function: `function ${index}`,
+        subFunction: `sub function ${index}`,
+        subSubFunction: `sub sub function ${index}`,
+        comments: `comment ${index}`,
+        functionalHead: `functional head ${index}`,
+        functionalExpert: `functional expert ${index}`,
+        mda: `mda ${index}`,
+      })),
       busy: false,
       firstRender: true,
     }
   },
+  computed: {
+    filteredPersons(): api.Person[] {
+      return this.persons.filter(person => {
+        for (const key in this.filter) {
+          // @ts-ignore
+          if (person[key] !== this.filter[key]) {
+            return false
+          }
+        }
+        return true
+      })
+    },
+    topFunctions(): string[] {
+      return this.persons.map(person => person.topFunction)
+    },
+    functions(): string[] {
+      return this.persons.map(person => person['function'])
+    },
+  },
   async created() {
     this.busy = true
-    await this.updatePersons()
+    // await this.updatePersons()
     this.busy = false
     this.firstRender = false
   },
   methods: {
+    setFilter(filter: any) {
+      this.filter = filter
+      this.filterTopFunction = false
+    },
     async updatePersons() {
       this.persons = await api.getPersons()
     },
@@ -160,31 +240,52 @@ export default Vue.extend({
 </script>
 
 <style>
-.mda-table,
-.mda-table-headings {
-  display: inline-flex;
-  flex-direction: column;
-}
-
-.mda-table-headings {
-  margin: 2rem 1rem 0 1rem;
+.mda-table {
+  border-spacing: 2.5rem 2rem;
+  margin: 0 auto;
+  flex: 0;
 }
 
 .mda-table-row {
-  display: flex;
-  border-bottom: 1px solid rgb(231, 231, 231);
+  position: relative;
+}
+
+.mda-table-row::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: rgb(231, 231, 231);
+  width: 100%;
+  height: 1px;
+  bottom: -1rem; /* half of border-spacing */
+  left: 0;
 }
 
 .mda-table-cell {
   margin: 1rem;
   text-align: left;
-  width: 6rem;
+}
+
+.mda-table-cell span {
+  display: flex;
+}
+
+.mda-table-cell svg {
+  height: 0.8em;
+  margin-left: 0.2rem;
+  margin-top: 0.15em;
 }
 
 .mda-table-heading {
   font-size: 1rem;
-  font-weight: 700;
   color: #42b983;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.mda-table-heading.selected {
+  font-weight: 700;
 }
 
 input {
@@ -203,5 +304,21 @@ input {
 }
 .mda-table-row-leave-active {
   height: 0px;
+}
+
+/* filter */
+
+ul {
+  all: unset;
+  list-style: none;
+}
+button {
+  all: unset;
+}
+.filter {
+  color: black;
+  position: absolute;
+  background: white;
+  z-index: 2;
 }
 </style>
