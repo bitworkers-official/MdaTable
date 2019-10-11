@@ -1,5 +1,5 @@
 <template>
-  <td :class="field" class="mda-table-cell">
+  <td>
     <!-- eslint-disable-next-line -->
     <input
       :id="id"
@@ -39,7 +39,7 @@ export default Vue.extend({
   },
   computed: {
     id(): string {
-      return `${this.person.cwid}-${this.field}`
+      return `${this.person.mda}-${this.field}`
     },
   },
   methods: {
