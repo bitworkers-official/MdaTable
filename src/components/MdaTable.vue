@@ -7,12 +7,12 @@
         aria-hidden
       >
         <td class="mda-table-cell mda-table-heading topFunction">
-          <span
+          <button
             @click="filterTopFunction = !filterTopFunction"
             @keydown.enter="filterTopFunction = !filterTopFunction"
           >
             Top&nbsp;Function <icon-angle-down />
-          </span>
+          </button>
           <div v-if="filterTopFunction" class="filter">
             Filter by Top Function
             <ul>
@@ -28,25 +28,25 @@
           </div>
         </td>
         <td class="mda-table-cell mda-table-heading function">
-          <span>Function <icon-angle-down /> </span>
+          <button>Function <icon-angle-down /></button>
         </td>
         <td class="mda-table-cell mda-table-heading subFunction">
-          <span> Sub&nbsp;Function <icon-angle-down /> </span>
+          <button>Sub&nbsp;Function <icon-angle-down /></button>
         </td>
         <td class="mda-table-cell mda-table-heading subSubFunction">
-          <span> Sub&nbsp;Sub&nbsp;Function <icon-angle-down /> </span>
+          <button>Sub&nbsp;Sub&nbsp;Function <icon-angle-down /></button>
         </td>
         <td class="mda-table-cell mda-table-heading comments">
-          <span> Comments <icon-angle-down /> </span>
+          <button>Comments <icon-angle-down /></button>
         </td>
         <td class="mda-table-cell mda-table-heading functionalHead">
-          <span> Functional&nbsp;Head <icon-angle-down /> </span>
+          <button>Functional&nbsp;Head <icon-angle-down /></button>
         </td>
         <td class="mda-table-cell mda-table-heading functionalExpert">
-          <span> Functional&nbsp;Expert <icon-angle-down /> </span>
+          <button>Functional&nbsp;Expert <icon-angle-down /></button>
         </td>
         <td class="mda-table-cell mda-table-heading mda">
-          <span> Mda <icon-angle-down /> </span>
+          <button>Mda <icon-angle-down /></button>
         </td>
       </tr>
     </thead>
@@ -266,7 +266,7 @@ export default Vue.extend({
   text-align: left;
 }
 
-.mda-table-cell span {
+.mda-table-cell > button {
   display: flex;
 }
 
