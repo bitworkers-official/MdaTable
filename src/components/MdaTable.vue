@@ -16,6 +16,9 @@
           <div v-if="filterTopFunction" class="filter">
             Filter by Top Function
             <ul>
+              <li role="option">
+                <button></button>
+              </li>
               <li v-for="topFunction in topFunctions" :key="topFunction">
                 <button
                   @click="setFilter({ topFunction })"
