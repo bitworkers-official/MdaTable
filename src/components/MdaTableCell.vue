@@ -1,16 +1,5 @@
 <template>
-  <td>
-    <!-- eslint-disable-next-line -->
-    <input
-      :id="id"
-      :value="person[field]"
-      @input="handleInput"
-      type="text"
-      autocomplete="off"
-      spellcheck="false"
-      class="w-full bg-transparent"
-    />
-  </td>
+  <td>{{ person[field] }}</td>
 </template>
 
 <script lang="ts">
@@ -18,10 +7,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'MdaTableCell',
-  model: {
-    prop: 'person',
-    event: 'updatePerson',
-  },
   props: {
     field: {
       type: String,
@@ -32,31 +17,16 @@ export default Vue.extend({
       required: true,
     },
   },
-  data() {
-    return {
-      dirty: false,
-    }
-  },
   computed: {
     id(): string {
       return `${this.person.mda}-${this.field}`
     },
   },
-  methods: {
-    handleInput(event: any) {
-      this.$emit('updatePerson', {
-        ...this.person,
-        [this.field]: event.target!.value,
-      })
-    },
-    // handleInput() {
-    //   this.dirty = true
-    // },
-    // handleBlur() {
-    //   if (this.dirty) {
-    //     this.$emit('update')
-    //   }
-    // }
-  },
 })
 </script>
+
+<style scoped>
+td {
+  color: #6f7981;
+}
+</style>

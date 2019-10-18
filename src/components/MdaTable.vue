@@ -87,49 +87,43 @@
           :person="person"
           @updatePerson="updatePerson"
           field="topFunction"
-        >
-        </mda-table-cell>
+        />
         <mda-table-cell
           :person="person"
           @updatePerson="updatePerson"
           field="function"
-        >
-        </mda-table-cell>
+        />
         <mda-table-cell
           :person="person"
           @updatePerson="updatePerson"
           field="subFunction"
-        >
-        </mda-table-cell>
+        />
         <mda-table-cell
           :person="person"
           @updatePerson="updatePerson"
           field="subSubFunction"
-        >
-        </mda-table-cell>
-        <mda-table-cell
+        />
+        <mda-table-cell-with-input
           :person="person"
           @updatePerson="updatePerson"
           field="comments"
-        >
-        </mda-table-cell>
-        <mda-table-cell
+        />
+
+        <mda-table-cell-with-input
           :person="person"
           @updatePerson="updatePerson"
           field="functionalHead"
-        >
-        </mda-table-cell>
-        <mda-table-cell
+        />
+        <mda-table-cell-with-input
           :person="person"
           @updatePerson="updatePerson"
           field="functionalExpert"
-        >
-        </mda-table-cell>
-        <mda-table-cell
+        />
+        <mda-table-cell-with-input
           :person="person"
           @updatePerson="updatePerson"
           field="mda"
-        ></mda-table-cell>
+        />
       </tr>
     </transition-group>
 
@@ -140,8 +134,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import LoadingSpinner from './LoadingSpinner.vue'
-import IconAngleDown from './Icons/IconAngleDown.vue'
 import MdaTableCell from './MdaTableCell.vue'
+import MdaTableCellWithInput from './MdaTableCellWithInput.vue'
 import FilterDropDown from './FilterDropDown.vue'
 import * as api from '../api/api'
 
@@ -163,6 +157,7 @@ export default Vue.extend({
     MdaTableCell,
     LoadingSpinner,
     FilterDropDown,
+    MdaTableCellWithInput,
   },
   data(): Data {
     return {
