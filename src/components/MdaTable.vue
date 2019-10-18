@@ -1,134 +1,150 @@
 <template>
-  <table :class="{ 'not-first-render': !firstRender }">
-    <thead class="mda-table-headings">
-      <tr v-if="!firstRender" class="text-green relative">
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="topFunction"
-            text="Top Function"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="function"
-            text="Function"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="subFunction"
-            text="Sub Function"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="subSubFunction"
-            text="Sub Sub Function"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="comments"
-            text="Comments"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="functionalHead"
-            text="Functional Head"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="functionalExpert"
-            text="Functional Expert"
-          />
-        </td>
-        <td>
-          <filter-drop-down
-            :persons="persons"
-            :setFilter="setFilter"
-            v-model="filter"
-            filter-key="mda"
-            text="Mda"
-          />
-        </td>
-      </tr>
-    </thead>
+  <div>
+    <table :class="{ 'not-first-render': !firstRender }">
+      <thead class="mda-table-headings sticky z-10 bg-white">
+        <tr v-if="!firstRender" class="text-green relative">
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="topFunction"
+              text="Top Function"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="function"
+              text="Function"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="subFunction"
+              text="Sub Function"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="subSubFunction"
+              text="Sub Sub Function"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="comments"
+              text="Comments"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="functionalHead"
+              text="Functional Head"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="functionalExpert"
+              text="Functional Expert"
+            />
+          </td>
+          <td>
+            <filter-drop-down
+              :persons="persons"
+              :setFilter="setFilter"
+              v-model="filter"
+              filter-key="mda"
+              text="Mda"
+            />
+          </td>
+        </tr>
+      </thead>
 
-    <transition-group name="mda-table-row" tag="tbody">
-      <tr
-        v-for="person in filteredPersons"
-        :key="person.mda"
-        class="hover:bg-gray-200 focus-within:bg-gray-200 relative"
-      >
-        <mda-table-cell
-          :person="person"
-          @updatePerson="updatePerson"
-          field="topFunction"
-        />
-        <mda-table-cell
-          :person="person"
-          @updatePerson="updatePerson"
-          field="function"
-        />
-        <mda-table-cell
-          :person="person"
-          @updatePerson="updatePerson"
-          field="subFunction"
-        />
-        <mda-table-cell
-          :person="person"
-          @updatePerson="updatePerson"
-          field="subSubFunction"
-        />
-        <mda-table-cell-with-input
-          :person="person"
-          @updatePerson="updatePerson"
-          field="comments"
-        />
+      <transition-group name="mda-table-row" tag="tbody">
+        <tr
+          v-for="person in filteredPersons"
+          :key="person.mda"
+          @contextmenu.prevent="$refs.menu.open($event, person)"
+          :data-top-function="person.topFunction"
+          :data-function="person.function"
+          :data-sub-function="person.subFunction"
+          :data-sub-sub-function="person.subSubFunction"
+          class="hover:bg-gray-200 focus-within:bg-gray-200 relative"
+        >
+          <mda-table-cell
+            :person="person"
+            @updatePerson="updatePerson"
+            field="topFunction"
+          />
+          <mda-table-cell
+            :person="person"
+            @updatePerson="updatePerson"
+            field="function"
+          />
+          <mda-table-cell
+            :person="person"
+            @updatePerson="updatePerson"
+            field="subFunction"
+          />
+          <mda-table-cell
+            :person="person"
+            @updatePerson="updatePerson"
+            field="subSubFunction"
+          />
+          <mda-table-cell-with-input
+            :person="person"
+            @updatePerson="updatePerson"
+            field="comments"
+          />
 
-        <mda-table-cell-with-input
-          :person="person"
-          @updatePerson="updatePerson"
-          field="functionalHead"
-        />
-        <mda-table-cell-with-input
-          :person="person"
-          @updatePerson="updatePerson"
-          field="functionalExpert"
-        />
-        <mda-table-cell-with-input
-          :person="person"
-          @updatePerson="updatePerson"
-          field="mda"
-        />
-      </tr>
-    </transition-group>
+          <mda-table-cell-with-input
+            :person="person"
+            @updatePerson="updatePerson"
+            field="functionalHead"
+          />
+          <mda-table-cell-with-input
+            :person="person"
+            @updatePerson="updatePerson"
+            field="functionalExpert"
+          />
+          <mda-table-cell-with-input
+            :person="person"
+            @updatePerson="updatePerson"
+            field="mda"
+          />
+        </tr>
+      </transition-group>
 
-    <loading-spinner :spinning="busy" />
-  </table>
+      <loading-spinner :spinning="busy" />
+    </table>
+    <vue-context ref="menu">
+      <template slot-scope="child">
+        <li>
+          <a @click.prevent="focusRow(child.data)" href="#">
+            Focus on this row
+          </a>
+        </li>
+      </template>
+    </vue-context>
+  </div>
 </template>
 
 <script lang="ts">
@@ -137,7 +153,10 @@ import LoadingSpinner from './LoadingSpinner.vue'
 import MdaTableCell from './MdaTableCell.vue'
 import MdaTableCellWithInput from './MdaTableCellWithInput.vue'
 import FilterDropDown from './FilterDropDown.vue'
+import { VueContext } from 'vue-context'
+// import 'vue-context/dist/css/vue-context.css'
 import * as api from '../api/api'
+import copyToClipBoard from 'copy-to-clipboard'
 
 interface Data {
   persons: api.Person[]
@@ -151,6 +170,71 @@ interface Data {
   }
 }
 
+const copyRowUrlToClipBoard = (person: api.Person) => {
+  const baseUrl = location.protocol + '//' + location.host + location.pathname
+  const queryString = new URLSearchParams({
+    topFunction: person.topFunction,
+    function: person.function,
+    subFunction: person.subFunction,
+    subSubFunction: person.subSubFunction,
+  }).toString()
+  copyToClipBoard(baseUrl + '?' + queryString)
+}
+
+const updateQueryString = (person: api.Person) => {
+  const queryString = new URLSearchParams({
+    topFunction: person.topFunction,
+    function: person.function,
+    subFunction: person.subFunction,
+    subSubFunction: person.subSubFunction,
+  }).toString()
+  window.history.replaceState({}, '', `${location.pathname}?${queryString}`)
+}
+
+let $activeRow: HTMLElement | undefined
+const setActive = ($row: HTMLElement) => {
+  if ($activeRow) {
+    $activeRow.classList.remove('active')
+  }
+  $activeRow = $row
+  $activeRow.classList.add('active')
+}
+
+const selectByFilter = (filter: object) => {
+  for (let key in filter) {
+    // @ts-ignore
+    if (!filter[key]) {
+      // @ts-ignore
+      delete filter[key]
+    }
+  }
+  if (Object.keys(filter).length === 0) {
+    return
+  }
+  const selector = Object.entries(filter)
+    .map(([key, value]) => `[data-${key}="${value}"]`)
+    .join('')
+  const $row = document.querySelector(selector) as HTMLElement
+  return $row || undefined
+}
+
+const focusOnSearchParamsRow = () => {
+  const queryString = location.search
+  const queryObject = new URLSearchParams(queryString)
+  const filter = {
+    'top-function': queryObject.get('topFunction'),
+    function: queryObject.get('function'),
+    'sub-function': queryObject.get('subFunction'),
+    'sub-sub-function': queryObject.get('subSubFunction'),
+  }
+  const $row = selectByFilter(filter)
+  if (!$row) {
+    return
+  }
+  window.scrollTo({ top: $row.offsetTop - 250 })
+  setActive($row)
+}
+
 export default Vue.extend({
   name: 'MdaTable',
   components: {
@@ -158,6 +242,7 @@ export default Vue.extend({
     LoadingSpinner,
     FilterDropDown,
     MdaTableCellWithInput,
+    VueContext,
   },
   data(): Data {
     return {
@@ -201,7 +286,22 @@ export default Vue.extend({
     this.busy = false
     this.firstRender = false
   },
+  mounted() {
+    focusOnSearchParamsRow()
+  },
   methods: {
+    // copyRowUrlToClipBoard,
+    focusRow(person: api.Person) {
+      const filter = {
+        'top-function': person.topFunction,
+        function: person.function,
+        'sub-function': person.subFunction,
+        'sub-sub-function': person.subSubFunction,
+      }
+      const $row = selectByFilter(filter) as HTMLElement
+      setActive($row)
+      updateQueryString(person)
+    },
     setFilter(filter: any) {
       this.filter = filter
     },
@@ -240,5 +340,15 @@ tbody tr:not(:last-of-type)::after {
 } */
 td {
   @apply p-4;
+}
+
+tr.active,
+tr.active:hover {
+  @apply bg-gray-400;
+}
+
+thead {
+  /* font size and padding of h1 */
+  top: calc(1.875rem + 3rem);
 }
 </style>

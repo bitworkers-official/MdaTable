@@ -8,7 +8,7 @@
       :options="['Show All', ...options]"
       :activeIndex.sync="activeIndex"
       @selectOption="selectOption"
-      class="text-black absolute bg-white z-10 w-40 left-0  shadow-lg outline-none"
+      class="text-black absolute bg-white z-10 w-40 left-0  shadow-xl outline-none"
     >
       >
       <template v-slot:default="{ option }">

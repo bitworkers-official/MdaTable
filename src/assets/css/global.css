@@ -12,3 +12,7 @@ button::-moz-focus-inner {
 button {
   outline: none !important;
 }
+
+body {
+  overflow-y: scroll;
+}
