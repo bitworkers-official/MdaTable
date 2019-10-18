@@ -1,5 +1,5 @@
 <template>
-  <td>{{ person[field] }}</td>
+  <td class="cursor-default">{{ person[field] }}</td>
 </template>
 
 <script lang="ts">
