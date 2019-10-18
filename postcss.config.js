@@ -1,4 +1,5 @@
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
+const whitelister = require('purgecss-whitelister')
 
 module.exports = {
   plugins: [
@@ -17,7 +18,9 @@ module.exports = {
             ) || []
           )
         },
-        whitelist: [],
+        whitelist: [
+          ...whitelister('node_modules/tailwindcss/dist/base.min.css'),
+        ],
         whitelistPatterns: [
           /-(leave|enter|appear)(|-(to|from|active))$/,
           /^(?!(|.*?:)cursor-move).+-move$/,

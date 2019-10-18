@@ -32,6 +32,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "eslint-plugin-vue-a11y": "0.0.31",
     "prettier": "^1.18.2",
+    "purgecss-whitelister": "^2.4.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
   },
