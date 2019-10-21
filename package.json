@@ -17,7 +17,8 @@
     "core-js": "^2.6.5",
     "tailwindcss": "^1.1.2",
     "vue": "^2.6.10",
-    "vue-context": "4.0.3"
+    "vue-context": "4.0.3",
+    "vue-toasted": "^1.1.27"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^1.3.0",

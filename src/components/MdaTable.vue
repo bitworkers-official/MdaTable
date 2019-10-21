@@ -286,7 +286,7 @@ export default Vue.extend({
     this.busy = false
     this.firstRender = false
   },
-  mounted() {
+  async mounted() {
     focusOnSearchParamsRow()
   },
   methods: {
@@ -306,13 +306,24 @@ export default Vue.extend({
       this.filter = filter
     },
     async updatePersons() {
-      this.persons = await api.getPersons()
+      try {
+        this.persons = await api.getPersons()
+      } catch (error) {
+        console.error(error)
+        this.$toasted.error('failed to fetch persons')
+      }
     },
     async updatePerson(person: api.Person, index: number) {
       this.$set(this.persons, index, person)
       this.busy = true
-      await api.updatePerson(person)
-      this.busy = false
+      try {
+        await api.updatePerson(person)
+      } catch (error) {
+        console.error(error)
+        this.$toasted.error('failed to update person')
+      } finally {
+        this.busy = false
+      }
       // await this.updatePersons()
     },
   },
