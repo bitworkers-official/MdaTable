@@ -5,6 +5,7 @@
       :id="id"
       :value="person[field]"
       @input="handleInput"
+      :disabled="disabled"
       type="text"
       autocomplete="off"
       spellcheck="false"
@@ -23,6 +24,10 @@ export default Vue.extend({
     event: 'updatePerson',
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     field: {
       type: String,
       required: true,
@@ -60,3 +65,9 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style scoped>
+input[disabled] {
+  color: #6f7981;
+}
+</style>

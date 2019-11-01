@@ -1,7 +1,7 @@
 <template>
   <div>
-    <table :class="{ 'not-first-render': !firstRender }">
-      <thead class="mda-table-headings sticky z-10 bg-white">
+    <table :class="{ 'not-first-render': !firstRender }" class="mx-auto">
+      <thead class="mda-table-headings sticky z-10 bg-white m-auto">
         <tr v-if="!firstRender" class="text-green relative">
           <td>
             <filter-drop-down
@@ -89,25 +89,29 @@
           :data-sub-sub-function="person.subSubFunction"
           class="hover:bg-gray-200 focus-within:bg-gray-200 relative"
         >
-          <mda-table-cell
+          <mda-table-cell-with-input
             :person="person"
             @updatePerson="updatePerson"
             field="topFunction"
+            disabled
           />
-          <mda-table-cell
+          <mda-table-cell-with-input
             :person="person"
             @updatePerson="updatePerson"
             field="function"
+            disabled
           />
-          <mda-table-cell
+          <mda-table-cell-with-input
             :person="person"
             @updatePerson="updatePerson"
             field="subFunction"
+            disabled
           />
-          <mda-table-cell
+          <mda-table-cell-with-input
             :person="person"
             @updatePerson="updatePerson"
             field="subSubFunction"
+            disabled
           />
           <mda-table-cell-with-input
             :person="person"
@@ -331,6 +335,10 @@ export default Vue.extend({
 </script>
 
 <style>
+table {
+  table-layout: fixed;
+  max-width: 1200px;
+}
 /* table { */
 /* border-spacing: 1.5rem 1.5rem; */
 /* } */
