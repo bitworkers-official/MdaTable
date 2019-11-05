@@ -77,11 +77,11 @@
           </td>
         </tr>
       </thead>
-
-      <transition-group name="mda-table-row" tag="tbody">
+      <tbody>
+        <!-- <transition-group name="mda-table-row" tag="tbody"> -->
         <tr
           v-for="person in filteredPersons"
-          :key="person.mda"
+          :key="JSON.stringify(person.mda)"
           @contextmenu.prevent="$refs.menu.open($event, person)"
           :data-top-function="person.topFunction"
           :data-function="person.function"
@@ -129,13 +129,14 @@
             @updatePerson="updatePerson"
             field="functionalExpert"
           />
-          <mda-table-cell-with-input
+          <mda-table-cell-with-input-mdas
             :person="person"
             @updatePerson="updatePerson"
-            field="mda"
           />
         </tr>
-      </transition-group>
+      </tbody>
+
+      <!-- </transition-group> -->
 
       <loading-spinner :spinning="busy" />
     </table>
@@ -156,6 +157,7 @@ import Vue from 'vue'
 import LoadingSpinner from './LoadingSpinner.vue'
 import MdaTableCell from './MdaTableCell.vue'
 import MdaTableCellWithInput from './MdaTableCellWithInput.vue'
+import MdaTableCellWithInputMdas from './MdaTableCellWithInputMdas.vue'
 import FilterDropDown from './FilterDropDown.vue'
 import { VueContext } from 'vue-context'
 // import 'vue-context/dist/css/vue-context.css'
@@ -242,7 +244,7 @@ const focusOnSearchParamsRow = () => {
 export default Vue.extend({
   name: 'MdaTable',
   components: {
-    MdaTableCell,
+    MdaTableCellWithInputMdas,
     LoadingSpinner,
     FilterDropDown,
     MdaTableCellWithInput,
@@ -259,7 +261,7 @@ export default Vue.extend({
         comments: `comment ${index}`,
         functionalHead: `functional head ${index}`,
         functionalExpert: `functional expert ${index}`,
-        mda: `mda ${index}`,
+        mdas: [`mda ${index}-1`, `mda ${index}-2`, `mda-${index}-3`],
       })),
       busy: false,
       firstRender: true,

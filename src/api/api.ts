@@ -8,7 +8,7 @@ export interface Person {
   comments: string
   functionalHead: string
   functionalExpert: string
-  mda: string
+  mdas: string[]
 }
 
 export const getPersons = async (): Promise<Person[]> => {

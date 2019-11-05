@@ -2,9 +2,10 @@
   <td>
     <!-- eslint-disable-next-line -->
     <input
-      :id="id"
-      :value="person[field]"
-      @input="handleInput"
+      v-for="(mda, index) in person.mdas"
+      :value="mda"
+      :key="index"
+      @input="handleInput($event.target.value, index)"
       :disabled="disabled"
       type="text"
       autocomplete="off"
@@ -28,10 +29,6 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
-    field: {
-      type: String,
-      required: true,
-    },
     person: {
       type: Object,
       required: true,
@@ -42,32 +39,13 @@ export default Vue.extend({
       dirty: false,
     }
   },
-  computed: {
-    id(): string {
-      return `${Math.random()}-${this.field}`
-    },
-  },
   methods: {
     handleInput(event: any) {
-      this.$emit('updatePerson', {
-        ...this.person,
-        [this.field]: event.target!.value,
-      })
+      // this.$emit('updatePerson', {
+      //   ...this.person,
+      //   mdas: event.target!.value,
+      // })
     },
-    // handleInput() {
-    //   this.dirty = true
-    // },
-    // handleBlur() {
-    //   if (this.dirty) {
-    //     this.$emit('update')
-    //   }
-    // }
   },
 })
 </script>
-
-<style scoped>
-input[disabled] {
-  color: #6f7981;
-}
-</style>
