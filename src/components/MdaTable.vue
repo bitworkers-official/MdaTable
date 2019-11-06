@@ -8,6 +8,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="topFunction"
               text="Top Function"
             />
@@ -17,6 +18,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="function"
               text="Function"
             />
@@ -26,6 +28,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="subFunction"
               text="Sub Function"
             />
@@ -35,6 +38,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="subSubFunction"
               text="Sub Sub Function"
             />
@@ -44,6 +48,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="comments"
               text="Comments"
             />
@@ -53,6 +58,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="functionalHead"
               text="Functional Head"
             />
@@ -62,6 +68,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="functionalExpert"
               text="Functional Expert"
             />
@@ -71,6 +78,7 @@
               :persons="persons"
               :setFilter="setFilter"
               v-model="filter"
+              :sort.sync="sort"
               filter-key="mda"
               text="Mda"
             />
@@ -80,7 +88,7 @@
       <tbody>
         <!-- <transition-group name="mda-table-row" tag="tbody"> -->
         <tr
-          v-for="person in filteredPersons"
+          v-for="person in filteredAndSortedPersons"
           :key="JSON.stringify(person.mda)"
           @contextmenu.prevent="$refs.menu.open($event, person)"
           :data-top-function="person.topFunction"
@@ -174,6 +182,7 @@ interface Data {
     subFunction?: string
     subSubFunction?: string
   }
+  sort: String
 }
 
 const copyRowUrlToClipBoard = (person: api.Person) => {
@@ -265,11 +274,12 @@ export default Vue.extend({
       })),
       busy: false,
       firstRender: true,
+      sort: '',
     }
   },
   computed: {
-    filteredPersons(): api.Person[] {
-      return this.persons.filter(person => {
+    filteredAndSortedPersons(): api.Person[] {
+      const filteredPersons = this.persons.filter(person => {
         for (const key in this.filter) {
           // @ts-ignore
           if (person[key] !== this.filter[key]) {
@@ -277,6 +287,18 @@ export default Vue.extend({
           }
         }
         return true
+      })
+      if (!this.sort) {
+        return filteredPersons
+      }
+      const [key, direction] = this.sort.split(':')
+      return filteredPersons.sort((a, b) => {
+        // @ts-ignore
+        const result = a[key].localeCompare(b[key])
+        if (direction === 'descending') {
+          return -result
+        }
+        return result
       })
     },
     topFunctions(): string[] {
@@ -296,7 +318,6 @@ export default Vue.extend({
     focusOnSearchParamsRow()
   },
   methods: {
-    // copyRowUrlToClipBoard,
     focusRow(person: api.Person) {
       const filter = {
         'top-function': person.topFunction,
