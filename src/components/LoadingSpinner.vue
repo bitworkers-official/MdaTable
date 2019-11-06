@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div role="region" aria-live="polite" class="screenreader-only">
+    <div role="region" aria-live="polite" class="screenreader-only hidden">
       {{ show ? 'syncing' : 'done' }}
     </div>
     <div v-show="show" class="spinner">
@@ -57,11 +57,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.wrapper {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-}
 .spinner {
   width: 40px;
   height: 40px;

@@ -1,153 +1,164 @@
 <template>
-  <div>
-    <table :class="{ 'not-first-render': !firstRender }" class="mx-auto">
-      <thead class="mda-table-headings sticky z-10 bg-white m-auto">
-        <tr v-if="!firstRender" class="text-green relative">
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="topFunction"
-              text="Top Function"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="function"
-              text="Function"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="subFunction"
-              text="Sub Function"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="subSubFunction"
-              text="Sub Sub Function"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="comments"
-              text="Comments"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="functionalHead"
-              text="Functional Head"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="functionalExpert"
-              text="Functional Expert"
-            />
-          </td>
-          <td>
-            <filter-drop-down
-              :persons="persons"
-              :setFilter="setFilter"
-              v-model="filter"
-              :sort.sync="sort"
-              filter-key="mda"
-              text="Mda"
-            />
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- <transition-group name="mda-table-row" tag="tbody"> -->
-        <tr
-          v-for="person in filteredAndSortedPersons"
-          :key="JSON.stringify(person.mda)"
-          @contextmenu.prevent="$refs.menu.open($event, person)"
-          :data-top-function="person.topFunction"
-          :data-function="person.function"
-          :data-sub-function="person.subFunction"
-          :data-sub-sub-function="person.subSubFunction"
-          class="hover:bg-gray-200 focus-within:bg-gray-200 relative"
+  <div class="flex flex-col relative">
+    <div class="bg-white z-10 w-full sticky bg-red-500  sticky top-0 flex">
+      <div class="relative w-full">
+        <div
+          class="absolute"
+          style="top:50%;left:50%;transform:translate(-300px, -50%);"
         >
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="topFunction"
-            disabled
-          />
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="function"
-            disabled
-          />
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="subFunction"
-            disabled
-          />
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="subSubFunction"
-            disabled
-          />
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="comments"
-          />
+          <loading-spinner :spinning="busy" />
+        </div>
+        <h1 class="text-3xl text-center font-bold bg-white z-10 py-6 w-full">
+          MDATable (GitHub Version)
+        </h1>
+      </div>
+    </div>
+    <div>
+      <table :class="{ 'not-first-render': !firstRender }" class="mx-auto">
+        <thead class="mda-table-headings sticky z-10 bg-white m-auto">
+          <tr v-if="!firstRender" class="text-green relative">
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="topFunction"
+                text="Top Function"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="function"
+                text="Function"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="subFunction"
+                text="Sub Function"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="subSubFunction"
+                text="Sub Sub Function"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="comments"
+                text="Comments"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="functionalHead"
+                text="Functional Head"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="functionalExpert"
+                text="Functional Expert"
+              />
+            </td>
+            <td>
+              <filter-drop-down
+                :persons="persons"
+                :setFilter="setFilter"
+                v-model="filter"
+                :sort.sync="sort"
+                filter-key="mda"
+                text="Mda"
+              />
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="person in filteredAndSortedPersons"
+            :key="JSON.stringify(person.mda)"
+            @contextmenu.prevent="$refs.menu.open($event, person)"
+            :data-top-function="person.topFunction"
+            :data-function="person.function"
+            :data-sub-function="person.subFunction"
+            :data-sub-sub-function="person.subSubFunction"
+            class="hover:bg-gray-200 focus-within:bg-gray-200 relative"
+          >
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="topFunction"
+              disabled
+            />
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="function"
+              disabled
+            />
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="subFunction"
+              disabled
+            />
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="subSubFunction"
+              disabled
+            />
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="comments"
+            />
 
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="functionalHead"
-          />
-          <mda-table-cell-with-input
-            :person="person"
-            @updatePerson="updatePerson"
-            field="functionalExpert"
-          />
-          <mda-table-cell-with-input-mdas
-            :person="person"
-            @updatePerson="updatePerson"
-          />
-        </tr>
-      </tbody>
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="functionalHead"
+            />
+            <mda-table-cell-with-input
+              :person="person"
+              @updatePerson="updatePerson"
+              field="functionalExpert"
+            />
+            <mda-table-cell-with-input-mdas
+              :person="person"
+              @updatePerson="updatePerson"
+            />
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <!-- </transition-group> -->
-
-      <loading-spinner :spinning="busy" />
-    </table>
     <vue-context ref="menu">
       <template slot-scope="child">
         <li>
