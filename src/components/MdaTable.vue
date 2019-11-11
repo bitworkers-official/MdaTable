@@ -101,7 +101,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="person in filteredAndSortedPersons"
+            v-for="{ person, index } in filteredAndSortedPersons"
             :key="JSON.stringify(person.mda)"
             @contextmenu.prevent="$refs.menu.open($event, person)"
             :data-top-function="person.topFunction"
@@ -112,47 +112,47 @@
           >
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="topFunction"
               disabled
             />
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="function"
               disabled
             />
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="subFunction"
               disabled
             />
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="subSubFunction"
               disabled
             />
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="comments"
             />
 
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="functionalHead"
             />
             <mda-table-cell-with-input
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
               field="functionalExpert"
             />
             <mda-table-cell-with-input-mdas
               :person="person"
-              @updatePerson="updatePerson"
+              @updatePerson="updatePerson($event, index)"
             />
           </tr>
         </tbody>
@@ -273,7 +273,7 @@ export default Vue.extend({
   data(): Data {
     return {
       filter: {},
-      persons: [...Array(80)].map((_, index) => ({
+      persons: [...Array(11)].map((_, index) => ({
         topFunction: `top function ${index}`,
         function: `function ${index}`,
         subFunction: `sub function ${index}`,
@@ -289,16 +289,18 @@ export default Vue.extend({
     }
   },
   computed: {
-    filteredAndSortedPersons(): api.Person[] {
-      const filteredPersons = this.persons.filter(person => {
-        for (const key in this.filter) {
-          // @ts-ignore
-          if (person[key] !== this.filter[key]) {
-            return false
+    filteredAndSortedPersons(): { person: api.Person; index: number }[] {
+      const filteredPersons = this.persons
+        .map((person, index) => ({ person, index }))
+        .filter(({ person }) => {
+          for (const key in this.filter) {
+            // @ts-ignore
+            if (person[key] !== this.filter[key]) {
+              return false
+            }
           }
-        }
-        return true
-      })
+          return true
+        })
       if (!this.sort) {
         return filteredPersons
       }
