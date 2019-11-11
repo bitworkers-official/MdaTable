@@ -1,6 +1,6 @@
-# MdaList
+# MdaTable
 
-![screenshot of mdalist](./demo.png)
+![screenshot of mdatable](./demo.png)
 
 ## Demo
 
@@ -9,8 +9,8 @@
 ## Quickstart 🚀
 
 ```sh
-git clone git@github.com:bitworkers-official/MdaList.git &&
-cd mdalist &&
+git clone git@github.com:bitworkers-official/MdaTable.git &&
+cd mdatable &&
 npm install &&
 npm run dev
 ```
